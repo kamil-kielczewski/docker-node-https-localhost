@@ -1,0 +1,5 @@
+FROM node:14
+
+EXPOSE 80
+EXPOSE 443
+

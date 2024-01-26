@@ -1,0 +1,42 @@
+version: "3"
+services:
+  web:
+    build: .
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./certs:/usr/src/app/certs
+      - .:/work
+    working_dir: /work
+    command: bash -c "npm start"
+    depends_on:
+      - cert-generator
+
+  cert-generator:
+    build:
+      context: .
+      dockerfile: DockerfileCert
+    volumes:
+      - ./certs:/certs
+      - ./certs/CA:/certs/CA
+
+  # run this service by: "docker compose run cmd" (type "exit" to exit the container)
+  # it will give you a bash shell in the container with node.
+  cmd:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - .:/work
+    working_dir: /work
+    profiles: ["nondefalut"]
+    command: bash -c "bash"
+
+volumes:
+  certs:
+    driver: local
+    driver_opts:
+      o: bind
+      type: none
+      device: ${PWD}/certs

@@ -1,0 +1,19 @@
+FROM alpine:latest
+
+# mkcert installation and other tools
+RUN apk add --no-cache curl nss
+RUN curl -L https://github.com/FiloSottile/mkcert/releases/download/v1.4.3/mkcert-v1.4.3-linux-amd64 -o mkcert
+RUN chmod +x mkcert && mv mkcert /usr/local/bin/
+
+RUN mkdir -p /certs/CA
+WORKDIR /certs
+
+# Create local CA and localhost certificates
+RUN mkcert -install
+RUN mkcert -cert-file localhost.crt -key-file localhost.key localhost
+
+# Copy CA certificate do directory /certs/CA
+RUN cp "$(mkcert -CAROOT)/rootCA.pem" /certs/CA/
+
+# Refresch certificates localhost and CA every 24 hours
+CMD mkcert -install && mkcert -cert-file localhost.crt -key-file localhost.key localhost && cp "$(mkcert -CAROOT)/rootCA.pem" /certs/CA/ && sleep 24h
