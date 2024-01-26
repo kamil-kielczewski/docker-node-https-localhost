@@ -52,4 +52,4 @@ If warnings still appear, ensure that the server is using certificates generated
 
 # Code
 
-Code created with [ChatGPT](https://chat.openai.com/) support in about 2h.
+Code created with [ChatGPT-4](https://chat.openai.com/) support in about 2h.
