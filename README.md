@@ -49,3 +49,7 @@ If warnings still appear, ensure that the server is using certificates generated
 `Dockerfile` contains example image with node.
 
 `docker-compose.yaml` map ./certs into node container and run `server.js` (it is example) which use it.
+
+# Code
+
+Code created with [ChatGPT](https://chat.openai.com/) support in about 2h.
