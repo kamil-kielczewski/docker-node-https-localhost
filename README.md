@@ -1,4 +1,4 @@
-# Node.js service template via HTTPS powerd by Docker
+# Node.js service template via HTTPS - docker, mkcert
 
 This is only template for node service working on HTTPS localhost
 
